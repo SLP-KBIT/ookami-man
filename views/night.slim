@@ -31,8 +31,20 @@ javascript:
       var time = parseInt(appTime.innerText);
       timeElement.innerText = "残り " + --time + " 秒";
       if (time === 0) {
-        location.href = "/noon";
-        clearInterval(timer);
+        var speech = new SpeechSynthesisUtterance();
+        speech.voiceURI = 'Kyoko';
+        speech.text = '昼時間が, 訪れました';
+        speech.lang = 'ja-JP';
+        speech.rate = 0.8;
+        speech.volume = 0.8;
+        speech.pitch = 1.1;
+        speechSynthesis.speak(speech);
+        var waitSpeack = setInterval(() => {
+          if (!speechSynthesis.speaking) {
+            location.href = "/noon";
+            clearInterval(waitSpeack);
+          }
+        });
       }
       appTime.innerText = time;
     }, 1000);

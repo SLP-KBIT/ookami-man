@@ -27,10 +27,6 @@ export default class SettingAction {
     }
     let br = document.createElement('br');
     parent.appendChild(br);
-    let button = document.createElement('button');
-    button.className = 'pure-button pure-button-primary';
-    button.innerText = 'ユーザー登録';
-    parent.appendChild(button);
   }
 }
 

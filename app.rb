@@ -10,7 +10,7 @@ require 'sass'
 
 set :root, File.dirname(__FILE__)
 set :public, File.dirname(__FILE__) << '/public'
-set :server, 'thin'
+# set :server, 'thin'
 set :sockets, []
 
 config = {}
