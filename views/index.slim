@@ -18,7 +18,6 @@ body
   h1.title
     | ookami-man
   hr.head-line
-
   div.pure-g
     div.pure-u-1-5
     div.pure-u-3-5
@@ -26,18 +25,39 @@ body
         fieldset
           legend
             | 設定
-          input.people[type="text" placeholder="参加人数"]
+          input.config.people[type="text" placeholder="参加人数"]
           button.deside-people.pure-button.pure-button-primary
             | ユーザーを登録する
       form.settings action="#"
         fieldset.config
           legend
             | ゲーム設定
+          div.pure-g
+            div.pure-u-1-2
+              .pure-control-group
+                label for="nighttime"
+                  | 夜時間(秒)
+                input.config[
+                  value="60"
+                  name="nighttime"
+                  id="nighttime"
+                  placeholder="数字で入力"
+                ]
+            div.pure-u-1-2
+              .pure-control-group
+                label for="noontime"
+                  | 昼時間(秒)
+                input.config[
+                  value="480"
+                  name="noontime"
+                  id="noontime"
+                  placeholder="数字で入力"
+                ]
+          br
         fieldset.people
           legend
             | 参加者一覧
-        br
-        button.deside-people.pure-button.pure-button-primary
-          | ゲームを開始する
+        button.start-game.pure-button.pure-button-success
+          | この設定ではじめる
 
     div.pure-u-1-5
