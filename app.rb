@@ -12,3 +12,6 @@ get '/' do
   slim :index
 end
 
+get '/wolf' do
+  erb :wolf
+end
