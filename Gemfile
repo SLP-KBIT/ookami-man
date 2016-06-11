@@ -4,7 +4,6 @@ gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-asset-pipeline', require: 'sinatra/asset_pipeline'
 
 gem 'uglifier'
-gem 'therubyracer', platform: :ruby
 gem 'slim'
 gem 'coffee-script'
 
