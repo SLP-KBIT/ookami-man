@@ -8,8 +8,7 @@
   "scripts": {
     "lint": "eslint src test",
     "build": "abby webpack --env",
-    "dev": "abby dev:*",
-    "dev:build": "webpack"
+    "dev": "webpack --progress --colors --watch"
   },
   "abigail": {
     "plugins": {
