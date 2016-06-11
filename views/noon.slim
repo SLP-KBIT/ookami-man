@@ -1,0 +1,39 @@
+html lang="ja"
+  head
+    meta charset="UTF-8"
+    title
+      | ookami-man
+    link[
+      rel="stylesheet"
+      type="text/css"
+      href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css"
+    ]
+    link[
+      rel="stylesheet"
+      href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"
+    ]
+    script[src="/ookami-man.js"]
+  body
+    h1.phase
+      | 昼時間
+    hr
+    h1.time = "残り #{@config[:noontime]} 秒"
+    .app-time[style="display: none;"] = @config[:noontime]
+    .extension
+      | 延長
+
+javascript:
+  (function() {
+    'use strict';
+    var timeElement = document.querySelector('h1.time');
+    var appTime = document.querySelector('.app-time');
+    setInterval(() => {
+      var time = parseInt(appTime.innerText);
+      timeElement.innerText = "残り " + --time + " 秒";
+      if (time === 0) {
+        location.href = "/night";
+        clearInterval(timer);
+      }
+      appTime.innerText = time;
+    }, 1000);
+  })()

@@ -29,10 +29,32 @@ body
           input.people[type="text" placeholder="参加人数"]
           button.deside-people.pure-button.pure-button-primary
             | ユーザーを登録する
-      form.settings action="#"
+      form.settings action="/noon"
         fieldset.config
           legend
             | ゲーム設定
+          div.pure-g
+            div.pure-u-1-2
+              .pure-control-group
+                label for="nighttime"
+                  | 夜時間(秒)
+                input.config[
+                  value="60"
+                  name="nighttime"
+                  id="nighttime"
+                  placeholder="数字で入力"
+                ]
+            div.pure-u-1-2
+              .pure-control-group
+                label for="noontime"
+                  | 昼時間(秒)
+                input.config[
+                  value="480"
+                  name="noontime"
+                  id="noontime"
+                  placeholder="数字で入力"
+                ]
+        br
         fieldset.people
           legend
             | 参加者一覧

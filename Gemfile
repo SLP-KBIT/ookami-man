@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-asset-pipeline', require: 'sinatra/asset_pipeline'
+gem 'sinatra-websocket'
 
 gem 'uglifier'
 gem 'slim'
 gem 'coffee-script'
+gem 'pry'
 
 group :development, :test do
   gem 'sinatra-contrib'

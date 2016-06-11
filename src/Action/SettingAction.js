@@ -3,7 +3,7 @@ import _ from 'lodash';
 export default class SettingAction {
 
   addListenChangePeople() {
-    const button = document.querySelector('button.deside-people');
+    let button = document.querySelector('button.deside-people');
     button.onclick = () => {
       const peopleText = document.querySelector('input.people').value;
       let people = 0;
@@ -21,7 +21,7 @@ export default class SettingAction {
     const parent = document.querySelector('fieldset.people');
     for (let i = 0; i < peopleNum; i++) {
       let input = document.createElement('input');
-      input.name = i;
+      input.name = 'users[]';
       input.className = 'user-name';
       parent.appendChild(input);
     }
