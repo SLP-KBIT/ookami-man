@@ -16,6 +16,7 @@ set :sockets, []
 
 config = {}
 users =  {}
+vote_num = {}
 
 ROLES = [
   # :villager,    # 村人
@@ -45,6 +46,21 @@ end
 
 def try_kill()
 
+end
+
+def add_vote(json)
+  vote_num = {}
+  user_name = json['user_name']
+  target_user = json['target_user']
+  vote_num[target_user].succ!
+end
+
+def count_vote
+  return vote_num.max
+end
+
+def reset_vote
+  vote_num = nil
 end
 
 get '/' do
@@ -99,6 +115,8 @@ get '/websocket' do
         case json['action']
         when 'change_to_night'
           # 票の集計処理
+          # count_vote
+          # reset_vote
           # 狩人反映
           # プレイヤー一覧の送信
         when 'change_to_noon'
@@ -106,6 +124,10 @@ get '/websocket' do
           # 霊能の結果を送信
           # 狼の噛み結果の送信
           # ゲーム情報の送信
+        when 'vote'
+          # 投票の加算
+          add_vote json
+          p vote_num
         when 'try_kill'
           # 噛み先の指定
         when 'try_defense'
