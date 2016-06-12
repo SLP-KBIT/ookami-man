@@ -11,35 +11,43 @@ html lang="ja"
   body
     h1[align="center"]
       | 人狼
+    em.name
+      | #{@my}
     hr
     .act-center
       button.button-CO.pure-button
-        | CO
+        | 投票
     h3 = @info
     .centering
-      ul.user-list
-        li.appearance
-          input[type="radio" name="vote"]
-          |  list1
-          input[type="checkbox"]
-          input[type="checkbox"]
-          input[type="checkbox"]
-        li.appearance
-          input[type="radio" name="vote"]
-          |  list2
-          input[type="checkbox"]
-          input[type="checkbox"]
-          input[type="checkbox"]
-        li.appearance
-          input[type="radio" name="vote"]
-          |  list3
-          input[type="checkbox"]
-          input[type="checkbox"]
-          input[type="checkbox"]
+      - @users.each do |key, value|
+        - unless value[:name] == @my
+          ul.user-list
+            li.appearance
+              <input type="radio" name="vote" value="#{value[:name]}" />
+              = "  #{key} : #{value[:name]}"
+              input[type="checkbox" style="margin: 10px;"]
+              input[type="checkbox" style="margin: 10px;"]
+              input[type="checkbox" style="margin: 10px;"]
+
       textarea[name="" cols="30" rows="10"]
     javascript:
       (function() {
         'use strict';
         var ws = new WebSocket('ws://' + window.location.host + '/websocket');
-
+        var button = document.querySelector('button.button-CO.pure-button')
+        button.onclick = () => {
+          var radios = document.querySelectorAll('input[type="radio"]');
+          var json = {}
+          for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+              var name = document.querySelector('em.name');
+              json = {
+                target_user: radios[i].value,
+                user_name: name.innerText,
+                action: 'vote'
+              }
+            }
+          }
+          ws.send(JSON.stringify(json));
+        }
       })()

@@ -52,7 +52,8 @@ def add_vote(json)
   vote_num = {}
   user_name = json['user_name']
   target_user = json['target_user']
-  vote_num[target_user].succ!
+  vote_num[target_user] ||= 0
+  vote_num[target_user] += 1
 end
 
 def count_vote
@@ -103,6 +104,8 @@ get '/users/:user_name' do
   rescue => e
     puts '404'
   end
+  @my = user_name
+  @users = config[:users]
   slim template
 end
 
@@ -112,6 +115,7 @@ get '/websocket' do
       ws.onopen { settings.sockets << ws }
       ws.onmessage do |data|
         json = JSON.parse(data)
+        p data
         case json['action']
         when 'change_to_night'
           # 票の集計処理
