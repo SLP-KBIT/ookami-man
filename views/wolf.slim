@@ -34,7 +34,20 @@ html lang="ja"
       (function() {
         'use strict';
         var ws = new WebSocket('ws://' + window.location.host + '/websocket');
-        var button = document.querySelector('button.button-CO.pure-button')
+        var button = document.querySelector('button.button-CO.pure-button');
+
+        ws.onmessage = (raw) => {
+          var payload = JSON.parse(raw.data);
+          switch (payload.action) {
+            case 'vote_result':
+              var h3 = document.querySelector('h3');
+              h3.innerText = payload.dead + 'さんが死にました';
+              break;
+          }
+        }
+
+        console.log(ws);
+
         button.onclick = () => {
           var radios = document.querySelectorAll('input[type="radio"]');
           var json = {}

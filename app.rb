@@ -121,8 +121,13 @@ get '/websocket' do
         case json['action']
         when 'change_to_night'
           # 票の集計処理
-          # count_vote
-          # reset_vote
+          max = max_vote
+          vote_result = {dead: max, action: 'vote_result'}.to_json
+          settings.sockets.each do |socket|
+            socket.send(vote_result)
+          end
+          p vote_result
+          reset_vote
           # 狩人反映
           # プレイヤー一覧の送信
         when 'change_to_noon'
@@ -134,7 +139,6 @@ get '/websocket' do
           # 投票の加算
           # add_vote json
           add_vote json['user_name'], json['target_user']
-          p max_vote
         when 'try_kill'
           # 噛み先の指定
         when 'try_defense'
