@@ -1,12 +1,63 @@
-html lang='ja'
+html lang="ja"
 head
-  meta charset='UTF-8'
+  meta charset="UTF-8"
   title
     | ookami-man
-  script[src='/ookami-man.js']
+  link[
+    rel="stylesheet"
+    type="text/css"
+    href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css"
+  ]
+  link[
+    rel="stylesheet"
+    href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"
+  ]
+  script[src="/ookami-man.js"]
 body
   div.space
   h1.title
     | ookami-man
   hr.head-line
+  div.pure-g
+    div.pure-u-1-5
+    div.pure-u-3-5
+      form.settings action="#"
+        fieldset
+          legend
+            | 設定
+          input.config.people[type="text" placeholder="参加人数"]
+          button.deside-people.pure-button.pure-button-primary
+            | ユーザーを登録する
+      form.settings action="/noon"
+        fieldset.config
+          legend
+            | ゲーム設定
+          div.pure-g
+            div.pure-u-1-2
+              .pure-control-group
+                label for="nighttime"
+                  | 夜時間(秒)
+                input.config[
+                  value="60"
+                  name="nighttime"
+                  id="nighttime"
+                  placeholder="数字で入力"
+                ]
+            div.pure-u-1-2
+              .pure-control-group
+                label for="noontime"
+                  | 昼時間(秒)
+                input.config[
+                  value="480"
+                  name="noontime"
+                  id="noontime"
+                  placeholder="数字で入力"
+                ]
+        br
+        fieldset.people
+          legend
+            | 参加者一覧
+        button.start-game.pure-button.pure-button-success
+          | この設定ではじめる
 
+    div.pure-u-1-5
