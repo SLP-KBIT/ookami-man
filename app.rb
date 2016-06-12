@@ -51,8 +51,8 @@ get '/' do
   slim :index
 end
 
-get '/wolf' do
-  slim :wolf
+get '/madman' do
+  slim :madman
 end
 
 get '/noon' do
