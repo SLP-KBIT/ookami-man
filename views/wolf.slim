@@ -1,6 +1,10 @@
-html
+html lang="ja"
   head
-    meta charset="UTF-8"
+  meta charset="UTF-8" name="viewport" content="width=device-width,user-scalable=0"
+    link[
+      rel="stylesheet"
+      href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"
+    ]
     title
       | 人狼ゲーム
     script[src="/ookami-man.js"]
@@ -11,31 +15,31 @@ html
     .act-center
       button.button-CO.pure-button
         | CO
+    h3 = @info
     .centering
-      form[action=""]
-        ul.user-list
-          li.appearance
-            input[type="radio" name="vote"]
-            |  list1
-            input[type="checkbox"]
-            input[type="checkbox"]
-            input[type="checkbox"]
-          li.appearance
-            input[type="radio" name="vote"]
-            |  list2
-            input[type="checkbox"]
-            input[type="checkbox"]
-            input[type="checkbox"]
-          li.appearance
-            input[type="radio" name="vote"]
-            |  list3
-            input[type="checkbox"]
-            input[type="checkbox"]
-            input[type="checkbox"]
-        textarea[name="" cols="30" rows="10"]
-javascript:
-  (function() {
-    'use strict';
-    var ws = new WebSocket('ws://' + window.location.host + '/websocket');
+      ul.user-list
+        li.appearance
+          input[type="radio" name="vote"]
+          |  list1
+          input[type="checkbox"]
+          input[type="checkbox"]
+          input[type="checkbox"]
+        li.appearance
+          input[type="radio" name="vote"]
+          |  list2
+          input[type="checkbox"]
+          input[type="checkbox"]
+          input[type="checkbox"]
+        li.appearance
+          input[type="radio" name="vote"]
+          |  list3
+          input[type="checkbox"]
+          input[type="checkbox"]
+          input[type="checkbox"]
+      textarea[name="" cols="30" rows="10"]
+    javascript:
+      (function() {
+        'use strict';
+        var ws = new WebSocket('ws://' + window.location.host + '/websocket');
 
-  })()
+      })()

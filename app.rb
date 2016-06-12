@@ -62,7 +62,7 @@ get '/noon' do
     config[:noontime] = params[:noontime] if params[:noontime]
     users = {}
     config[:users].each_with_index do |user, index|
-      users[index] = {role: deside_role, name: user}
+      users[index] = {role: deside_role, name: user, live: true}
     end
     config[:users] = users
   end
@@ -81,6 +81,7 @@ get '/users/:user_name' do
   template = ''
   begin
     config[:users].each do |key, value|
+      @info = 'あなたは死にました' unless value[:live]
       template = value[:role] if value[:name] == user_name
     end
   rescue => e
@@ -119,5 +120,4 @@ get '/websocket' do
     end
   end
 end
-
 
