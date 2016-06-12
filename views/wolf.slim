@@ -1,28 +1,41 @@
-h1[align="center"]
-  | 人狼
-hr
-.act-center
-  button.button-CO.pure-button
-    | CO
-.centering
-  form[action=""]
-    ul.user-list
-      li.appearance
-        input[type="radio" name="vote"]
-        |  list1 
-        input[type="checkbox"]
-        input[type="checkbox"]
-        input[type="checkbox"]
-      li.appearance
-        input[type="radio" name="vote"]
-        |  list2 
-        input[type="checkbox"]
-        input[type="checkbox"]
-        input[type="checkbox"]
-      li.appearance
-        input[type="radio" name="vote"]
-        |  list3 
-        input[type="checkbox"]
-        input[type="checkbox"]
-        input[type="checkbox"]
-    textarea[name="" cols="30" rows="10"]
+doctype html
+html
+  head
+    meta[name="viewport" content="text/html; charset=UTF-8; width=device-width, initial-scale=1"]
+    title
+      | 人狼ゲーム
+    script[src="/ookami-man.js"]
+  body
+    h1[align="center"]
+      | 人狼
+    hr
+    .act-center
+      button.button-CO.pure-button
+        | CO
+    .centering
+      form[action=""]
+        ul.user-list
+          li.appearance
+            input[type="radio" name="vote"]
+            |  list1
+            input[type="checkbox"]
+            input[type="checkbox"]
+            input[type="checkbox"]
+          li.appearance
+            input[type="radio" name="vote"]
+            |  list2
+            input[type="checkbox"]
+            input[type="checkbox"]
+            input[type="checkbox"]
+          li.appearance
+            input[type="radio" name="vote"]
+            |  list3
+            input[type="checkbox"]
+            input[type="checkbox"]
+            input[type="checkbox"]
+        textarea[name="" cols="30" rows="10"]
+javascript:
+  (function() {
+    'use strict';
+    var ws = new WebSocket('ws://' + window.location.host + '/websocket');
+  })()

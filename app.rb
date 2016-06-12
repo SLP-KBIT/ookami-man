@@ -67,13 +67,11 @@ get '/noon' do
   end
 
   @config = config
-  p @config.to_json
   slim :noon
 end
 
 get '/night' do
   @config = config
-  p @config.to_json
   slim :night
 end
 
