@@ -16,6 +16,8 @@ set :sockets, []
 
 config = {}
 users =  {}
+@@vote_num = {}
+@@vote_counts = {}
 
 ROLES = [
   # :villager,    # 村人
@@ -47,12 +49,28 @@ def try_kill()
 
 end
 
-get '/' do
-  slim :index
+def add_vote(user_name, target_user)
+  @@vote_num[user_name] ||= ''
+  @@vote_num[user_name] = target_user
+  nil
 end
 
-get '/wolf' do
-  slim :wolf
+def max_vote
+  map = {}
+  @@vote_num.values.each do |value|
+    map[value] ||= 0
+    map[value] += 1
+  end
+  max = map.find { |key, value| value == map.values.max }
+  max[0]
+end
+
+def reset_vote
+  vote_num = nil
+end
+
+get '/' do
+  slim :index
 end
 
 get '/noon' do
@@ -62,7 +80,7 @@ get '/noon' do
     config[:noontime] = params[:noontime] if params[:noontime]
     users = {}
     config[:users].each_with_index do |user, index|
-      users[index] = {role: deside_role, name: user}
+      users[index] = {role: deside_role, name: user, live: true}
     end
     config[:users] = users
   end
@@ -81,11 +99,14 @@ get '/users/:user_name' do
   template = ''
   begin
     config[:users].each do |key, value|
+      @info = 'あなたは死にました' unless value[:live]
       template = value[:role] if value[:name] == user_name
     end
   rescue => e
     puts '404'
   end
+  @my = user_name
+  @users = config[:users]
   slim template
 end
 
@@ -95,9 +116,13 @@ get '/websocket' do
       ws.onopen { settings.sockets << ws }
       ws.onmessage do |data|
         json = JSON.parse(data)
+        p data
+        p json
         case json['action']
         when 'change_to_night'
           # 票の集計処理
+          # count_vote
+          # reset_vote
           # 狩人反映
           # プレイヤー一覧の送信
         when 'change_to_noon'
@@ -105,6 +130,11 @@ get '/websocket' do
           # 霊能の結果を送信
           # 狼の噛み結果の送信
           # ゲーム情報の送信
+        when 'vote'
+          # 投票の加算
+          # add_vote json
+          add_vote json['user_name'], json['target_user']
+          p max_vote
         when 'try_kill'
           # 噛み先の指定
         when 'try_defense'
@@ -119,5 +149,4 @@ get '/websocket' do
     end
   end
 end
-
 
