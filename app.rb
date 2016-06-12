@@ -44,6 +44,10 @@ get '/' do
   slim :index
 end
 
+get '/wolf' do
+  slim :wolf
+end
+
 get '/noon' do
   config[:users] = params[:users] if params[:users]
   config[:nighttime] = params[:nighttime] if params[:nighttime]
