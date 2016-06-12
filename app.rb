@@ -45,7 +45,7 @@ get '/' do
 end
 
 get '/wolf' do
-  erb :wolf
+  slim :wolf
 end
 
 get '/noon' do
