@@ -48,10 +48,10 @@ def try_kill()
 
 end
 
-def add_vote(json)
-  vote_num = {}
-  user_name = json['user_name']
-  target_user = json['target_user']
+def add_vote(user_name, target_user)
+  vote_num = Array.new
+  # user_name = json['user_name']
+  # target_user = json['target_user']
   vote_num[target_user] ||= 0
   vote_num[target_user] += 1
 end
@@ -66,10 +66,6 @@ end
 
 get '/' do
   slim :index
-end
-
-get '/wolf' do
-  slim :wolf
 end
 
 get '/noon' do
@@ -116,6 +112,7 @@ get '/websocket' do
       ws.onmessage do |data|
         json = JSON.parse(data)
         p data
+        p json
         case json['action']
         when 'change_to_night'
           # 票の集計処理
@@ -130,7 +127,8 @@ get '/websocket' do
           # ゲーム情報の送信
         when 'vote'
           # 投票の加算
-          add_vote json
+          # add_vote json
+          add_vote json['user_name'], json['target_user']
           p vote_num
         when 'try_kill'
           # 噛み先の指定
