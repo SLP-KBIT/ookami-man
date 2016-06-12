@@ -8,6 +8,7 @@ gem 'uglifier'
 gem 'slim'
 gem 'coffee-script'
 gem 'pry'
+gem 'json'
 
 group :development, :test do
   gem 'sinatra-contrib'
@@ -26,3 +27,4 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
 end
 
+gem 'eventmachine'
