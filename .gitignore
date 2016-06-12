@@ -10,3 +10,5 @@
 
 /public/*
 
+/node_modules
+/vendor/bundle/*

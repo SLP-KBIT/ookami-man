@@ -50,6 +50,10 @@ get '/' do
   slim :index
 end
 
+get '/wolf' do
+  slim :wolf
+end
+
 get '/noon' do
   unless params[:users].nil?
     config[:users] = params[:users] if params[:users]
