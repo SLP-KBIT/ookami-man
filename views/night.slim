@@ -43,7 +43,7 @@ javascript:
     var changePhase = function() {
       readMessage('昼時間が訪れました');
       setTimeout(() => {
-        ws.send('change_to_noon');
+        ws.send('{"action": "change_to_noon"}');
         location.href = "/noon";
       }, 3000);
     }

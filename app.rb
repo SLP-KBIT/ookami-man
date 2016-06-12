@@ -18,11 +18,12 @@ config = {}
 users =  {}
 
 ROLES = [
-  :villager,    # 村人
+  # :villager,    # 村人
   :wolf,        # 狼
-  :madman,      # 狂人
-  :teller,      # 占い師
-  :psychic_mage # 霊能術師
+  # :madman,      # 狂人
+  # :teller,      # 占い師
+  # :knight,      # 騎士
+  # :psychic_mage # 霊能術師
 ].freeze
 
 # @return String: role_name
@@ -66,13 +67,26 @@ get '/noon' do
     config[:users] = users
   end
 
-  @config = config
+  p @config = config
   slim :noon
 end
 
 get '/night' do
-  @config = config
+  p @config = config
   slim :night
+end
+
+get '/users/:user_name' do
+  user_name = params[:user_name]
+  template = ''
+  begin
+    config[:users].each do |key, value|
+      template = value[:role] if value[:name] == user_name
+    end
+  rescue => e
+    puts '404'
+  end
+  slim template
 end
 
 get '/websocket' do
@@ -80,7 +94,8 @@ get '/websocket' do
     request.websocket do |ws|
       ws.onopen { settings.sockets << ws }
       ws.onmessage do |data|
-        case data
+        json = JSON.parse(data)
+        case json['action']
         when 'change_to_night'
           # 票の集計処理
           # 狩人反映

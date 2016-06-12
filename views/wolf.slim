@@ -1,7 +1,6 @@
-doctype html
 html
   head
-    meta[name="viewport" content="text/html; charset=UTF-8; width=device-width, initial-scale=1"]
+    meta charset="UTF-8"
     title
       | 人狼ゲーム
     script[src="/ookami-man.js"]
@@ -38,4 +37,5 @@ javascript:
   (function() {
     'use strict';
     var ws = new WebSocket('ws://' + window.location.host + '/websocket');
+
   })()
