@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra-websocket'
+require 'em/pure_ruby'
 if development?
-  require 'sinatra/reloader'
   require 'pry'
 end
 
@@ -11,7 +11,7 @@ require 'sass'
 
 set :root, File.dirname(__FILE__)
 set :public, File.dirname(__FILE__) << '/public'
-# set :server, 'thin'
+set :server, 'thin'
 set :sockets, []
 
 config = {}
@@ -51,8 +51,8 @@ get '/' do
   slim :index
 end
 
-get '/wolf' do
-  slim :wolf
+get '/villager' do
+  slim :villager
 end
 
 get '/noon' do

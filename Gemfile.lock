@@ -156,8 +156,10 @@ DEPENDENCIES
   capybara
   codeclimate-test-reporter
   coffee-script
+  eventmachine
   factory_girl
   foreman
+  json
   poltergeist
   pry
   rack-test
