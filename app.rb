@@ -16,7 +16,8 @@ set :sockets, []
 
 config = {}
 users =  {}
-vote_num = {}
+@@vote_num = {}
+@@vote_counts = {}
 
 ROLES = [
   # :villager,    # 村人
@@ -49,15 +50,19 @@ def try_kill()
 end
 
 def add_vote(user_name, target_user)
-  vote_num = Array.new
-  # user_name = json['user_name']
-  # target_user = json['target_user']
-  vote_num[target_user] ||= 0
-  vote_num[target_user] += 1
+  @@vote_num[user_name] ||= ''
+  @@vote_num[user_name] = target_user
+  nil
 end
 
-def count_vote
-  return vote_num.max
+def max_vote
+  map = {}
+  @@vote_num.values.each do |value|
+    map[value] ||= 0
+    map[value] += 1
+  end
+  max = map.find { |key, value| value == map.values.max }
+  max[0]
 end
 
 def reset_vote
@@ -129,7 +134,7 @@ get '/websocket' do
           # 投票の加算
           # add_vote json
           add_vote json['user_name'], json['target_user']
-          p vote_num
+          p max_vote
         when 'try_kill'
           # 噛み先の指定
         when 'try_defense'
